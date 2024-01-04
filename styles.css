@@ -1,0 +1,121 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+#wrapper{
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #F1EAFF;
+    height: 100vh;
+}
+#header{
+    /* position: absolute; */
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 48px;
+    background-color: #ad89f3;
+    border-bottom: solid white 2px;
+}
+.motivation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: solid; */
+    width: 500px;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: rgb(49, 49, 49);
+    /* color: grey; */
+}
+.workspaces{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* border: solid; */
+}
+
+.side-panel{
+    height: 100%;
+    width: 350px;
+    background-color: #d7c4fd;
+    border-right: solid white 2px;
+}
+.profile{
+    width: 100%;
+    height: 100px;
+    border-bottom: solid white 2px;
+}
+.task-content{
+    padding-left: 100px;
+    /* border: solid; */
+    width: 100%;
+}
+.task-head{
+    height: 100px;
+    /* border: solid; */
+    padding: 15px 0px;
+    font-size: 45px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.tasks::-webkit-scrollbar {
+    display: none;
+}
+.tasks{
+    /* border: solid; */
+    height: calc(100vh - 48px - 150px);
+    overflow-y: scroll;
+    padding-right: 100px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.add-task{
+    display: flex;
+    align-items: center;
+    /* border: solid; */
+    /* padding: 10px 0px; */
+    padding-right: 100px;
+    height: 50px;
+}
+.get-task{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    border-top: solid white 2px;
+    padding-left: 15px;
+    /* justify-content: space-between; */
+}
+.add-task-field{
+    resize: none;
+    border: solid;
+    background: none;
+    height: 100%;
+    width: calc(100% - 115px);
+    border-style: none;
+    outline: none;
+    font-size: 16px;
+    /* padding-left: 15px; */
+    font-family: 'Poppins', sans-serif;
+}
+.add-task-button{
+    height: 100%;
+    width: 100px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    background: none;
+    border: none;
+    border-left: solid white 2px;
+    transition: background-color 0.3s;
+}
+.add-task-button:hover{
+    background-color:#d7c4fd;
+    transition: background-color 0.3s;
+}
