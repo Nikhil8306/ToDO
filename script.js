@@ -5,11 +5,3 @@ const wrapper = document.querySelector('#wrapper');
 toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('sidebar-open');
 });
-
-function reportWindowSize() {
-    let height = window.innerHeight;
-    wrapper.style.height = height+'px';
-}
-
-reportWindowSize();
-window.onresize = reportWindowSize;
