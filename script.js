@@ -6,10 +6,10 @@ toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('sidebar-open');
 });
 
-// function reportWindowSize() {
-//     let height = window.innerHeight;
-//     wrapper.style.height = 100+'px';
-// }
+function reportWindowSize() {
+    let height = window.innerHeight;
+    wrapper.style.height = height+'px';
+}
 
-// reportWindowSize();
-// window.onresize = reportWindowSize;
+reportWindowSize();
+window.onresize = reportWindowSize;
