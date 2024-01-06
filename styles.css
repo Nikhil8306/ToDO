@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
@@ -45,30 +46,49 @@ body{
     display: flex;
     width: 100%;
     height: 100%;
-    /* border: solid; */
 }
 
 .side-panel{
     /* position: absolute; */
+    position: relative;
     height: 100%;
     width: 0px;
     background-color: #d7c4fd;
     border-right: solid white 2px;
     transition: width 0.2s;
+    visibility: hidden;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
-.sidebar-open{
+.panel-item{
+    text-decoration: none;
+    padding-left: 25px;
+    height: 70px;
+    width: 100%;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.15s;
+}
+
+.panel-item:hover{
+    color: rgb(49, 49, 49);
     
+    background-color: #bc9ef7;
+    transition: background-color 0.2s;
+}
+
+.sidebar-open{
+    visibility: visible;
     height: 100%;
     width: 350px;
     background-color: #d7c4fd;
     border-right: solid white 2px;
     transition: width 0.2s;
 }
-.sidebar-content{
-    position: relative;
-    height: calc(100% - 100px);
-}
+
 .side-toggle{
+    visibility: visible;
     position:absolute;
     height: 40px;
     width: 30px;
@@ -92,36 +112,50 @@ body{
     height: 100px;
     border-bottom: solid white 2px;
 }
-.task-content{
+.content{
     padding-left: 100px;
+    padding-right: 100px;
     /* border: solid; */
     width: 100%
 }
-.task-head{
+.task-content{
+    width: 100%;
+    height: 100%;
+    /* display: none; */
+}
+.home-content{
+    width: 100%;
+    height: 100%;
+    /* display: none; */
+}
+.statistics-content{
+    width: 100%;
+    height: 100%;
+    /* display: none; */
+}
+.community-content{
+    width: 100%;
+    height: 100%;
+}
+.content-head{
     height: 100px;
-    /* border: solid; */
     padding: 15px 0px;
     font-size: 3.1rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
-.tasks::-webkit-scrollbar {
+.content-body::-webkit-scrollbar {
     display: none;
 }
-.tasks{
-    /* border: solid; */
+.content-body{
     height: calc(100vh - 48px - 150px);
     overflow-y: scroll;
-    padding-right: 100px;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
 }
 .add-task{
     display: flex;
     align-items: center;
-    /* border: solid; */
-    /* padding: 10px 0px; */
-    padding-right: 100px;
     height: 50px;
 }
 .get-task{
@@ -158,17 +192,38 @@ body{
     background-color:#d7c4fd;
     transition: background-color 0.3s;
 }
+.home-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+    color: rgb(82, 82, 82);
+}
+.stat-chart{
+    border: solid;
+    width: 100%;
+    height: 25rem;
+}
+.home-content-2{
+    display: flex;
+    gap: 1.05rem;
+    height: 25rem;
+    
+    width: 100%;
+}
+.home-content-2>div{
+    width: 100%;
+    border: solid;
+}
 
 @media (max-width:1200px) and (min-width:901px){
     html{
         font-size: 14px;
     }
-    .task-content{
-        padding-left: 70px;
+    .content{
+        padding-left: 60px;
+        padding-right: 60px;
     }
-    .add-task{
-        padding-right: 70px;
-    }
+
 }
 @media (max-width:900px) and (min-width:601px){
     html{
@@ -181,15 +236,27 @@ body{
     .sidebar-open{
         width: 0px;
     }
-    .task-content{
-        padding-left: 60px;
+    .content{
+        padding-left: 50px;
+        padding-right: 50px;
     }
-    .add-task{
-        padding-right: 60px;
+
+}
+@media (max-width:900px){
+    .side-panel{
+        visibility: visible;
+    }
+    .sidebar-open{
+        visibility: hidden;
+    }
+    .panel-item{
+        height: 65px;
     }
 }
 @media (max-width:600px){
-
+    .panel-item{
+        height: 50px;
+    }
 }
 @media (max-width:600px) and (min-width:480px){
     html{
@@ -205,12 +272,11 @@ body{
     .sidebar-open{
         width: 0px;
     }
-    .task-content{
-        padding-left: 40px;
+    .content{
+        padding-left: 30px;
+        padding-right: 30px;
     }
-    .add-task{
-        padding-right: 40px;
-    }
+
 }
 @media (max-width:479px){
     html{
@@ -226,11 +292,9 @@ body{
     .sidebar-open{
         width: 0px;
     }
-    .task-content{
-        padding-left: 30px;
-    }
-    .add-task{
-        padding-right: 30px;
+    .content{
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .add-task-button{
         width: 60px;
@@ -240,4 +304,7 @@ body{
     .task-head{
         font-size: 2rem;
     }
+}
+.hide{
+    display: none;
 }

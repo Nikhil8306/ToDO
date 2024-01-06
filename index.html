@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div id="wrapper">
 
@@ -17,30 +20,69 @@
         </div>
         <div class="workspaces">
             <div class="side-panel sidebar-open">
+
                 <div class="profile">
-
                 </div>
-                <div class="sidebar-content">
-                    <button type="button" class="side-toggle">|</button>
-                </div>
-                
+                <a class="panel-item home">Home</a>
+                <a class="panel-item stat">Statistics</a>
+                <a class="panel-item communities">Communities</a>
+                <a class="panel-item my-task">My Tasks</a>
+                <button type="button" class="side-toggle">|</button>
             </div>
-            <div class="task-content">
-                <div class="task-head">
-                    🎯 Tittle
-                </div>
-                <div class="tasks">
+            <div class="content">
+
+                <div class="task-content hide">
+                    <div class="content-head">
+                        🎯 Tasks
+                    </div>
+                    <div class="content-body">
+                    </div>
+    
+                    <div class="add-task">
+                        <div class="get-task">
+                            <input type="addTask" placeholder="Add Task" class="add-task-field">
+                            <button type="button" class="add-task-button">Add</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="add-task">
-                    <div class="get-task">
-                        <input type="addTask" placeholder="Add Task" class="add-task-field">
-                        <button type="button" class="add-task-button">Add</button>
+                <div class="home-content">
+                    <div class="content-head">
+                        🏠 Home
+                    </div>
+                    <div class="content-body home-body">
+                        <div class="stat-chart">
+
+                        </div>
+                        <div class="home-content-2">
+                            <div class="home-tasks">
+
+                            </div>
+                            <div class="home-comm">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="statistics-content hide">
+                    <div class="content-head">
+                        📈 Statistics
+                    </div>
+                    
+                </div>
+
+                <div class="community-content hide">
+                    <div class="content-head">
+                        🫱🏻‍🫲🏻 Communities
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <script src="script.js"></script>
-</body> 
+</body>
+
 </html>
