@@ -59,24 +59,19 @@ body{
     visibility: hidden;
     font-size: 1.1rem;
     font-weight: 500;
+    z-index: 10;
 }
 .panel-item{
     text-decoration: none;
     padding-left: 25px;
-    height: 70px;
+    height: 80px;
     width: 100%;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     transition: background-color 0.15s;
 }
 
-.panel-item:hover{
-    color: rgb(49, 49, 49);
-    
-    background-color: #bc9ef7;
-    transition: background-color 0.2s;
-}
 
 .sidebar-open{
     visibility: visible;
@@ -103,10 +98,7 @@ body{
     color: rgb(170, 168, 168);
     transition: color 0.1s;
 }
-.side-toggle:hover{
-    color: black;
-    transition: 0.2s;
-}
+
 .profile{
     width: 100%;
     height: 100px;
@@ -117,25 +109,6 @@ body{
     padding-right: 100px;
     /* border: solid; */
     width: 100%
-}
-.task-content{
-    width: 100%;
-    height: 100%;
-    /* display: none; */
-}
-.home-content{
-    width: 100%;
-    height: 100%;
-    /* display: none; */
-}
-.statistics-content{
-    width: 100%;
-    height: 100%;
-    /* display: none; */
-}
-.community-content{
-    width: 100%;
-    height: 100%;
 }
 .content-head{
     height: 100px;
@@ -150,10 +123,13 @@ body{
 .content-body{
     height: calc(100vh - 48px - 150px);
     overflow-y: scroll;
+    overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none; 
 }
+
 .add-task{
+    position: relative;
     display: flex;
     align-items: center;
     height: 50px;
@@ -188,10 +164,7 @@ body{
     border-left: solid white 2px;
     transition: background-color 0.15s;
 }
-.add-task-button:hover{
-    background-color:#d7c4fd;
-    transition: background-color 0.3s;
-}
+
 .home-body{
     display: flex;
     flex-direction: column;
@@ -214,7 +187,138 @@ body{
     width: 100%;
     border: solid;
 }
+.fade-animation{
+    animation: fade-in 0.158s;
+}
+.bottom-fade{
+    z-index: 2;
+    position: absolute;
+    width: 105%;
+    top: -2rem;
+    height: 2rem;
+    /* border: solid; */
+    background: linear-gradient(rgba(255, 255, 255, 0), #F1EAFF);
+}
+.task-box{
+    position: relative;
+    border: solid rgb(109, 109, 109) 2px;
+    border-radius: 5px;
+    display: flex;
+    position: relative;
+    height: 4rem;
+    margin-top: 0.8rem;
+    padding-left: 0.8rem;
 
+}
+.task-hover{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s;
+}
+.show-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    width: 85%;
+    height: 100%;
+    background-color: #f1eaffd8;
+    transition: background-color 0.2s;
+}
+.remove-task{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    padding-left: 0.8rem;
+    font-size: 1.2rem;
+    width: 15%;
+    height: 100%;
+    background-color: rgba(238, 82, 82, 0.959);
+    transition: background-color 0.2s;
+}
+.task-det{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+}
+.task-name{
+    width: 90%;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.completion-status{
+    width: 10%;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+}
+.other-details{
+    display: flex;
+    gap: 1.4rem;
+    font-size: 0.9rem;
+    /* width: 100px; */
+    /* border: solid; */
+}
+.hide-extra-details{
+    display: none;
+}
+.invisible-task-box{
+    border: none;
+    /* visibility: none; */
+}
+@media (hover: hover){
+    
+    .panel-item:hover{
+        color: rgb(49, 49, 49);
+        
+        background-color: #bc9ef7;
+        transition: background-color 0.2s;
+    }
+    .side-toggle:hover{
+        color: black;
+        transition: 0.2s;
+    }
+    .add-task-button:hover{
+        background-color:#d7c4fd;
+        transition: background-color 0.3s;
+    }
+
+    .task-box:hover>.task-hover{
+        opacity: 1;
+        backdrop-filter: blur(2px);
+        transition: opacity 0.3s, backdrop-filter 0.3s;
+    }
+    .show-details:hover{
+        background-color: #f1eaff9c;
+        
+        transition: background-color 0.3s;
+    }
+    .remove-task:hover{
+        background-color: rgb(238, 82, 82);
+        transition: background-color 0.3s;
+    }
+}
+@media (hover: none){
+    .panel-item:focus-visible{
+        color: rgb(49, 49, 49);
+    }
+}
+@keyframes fade-in{
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity:1;
+    }
+
+}
 @media (max-width:1200px) and (min-width:901px){
     html{
         font-size: 14px;
@@ -250,12 +354,12 @@ body{
         visibility: hidden;
     }
     .panel-item{
-        height: 65px;
+        height: 70px;
     }
 }
 @media (max-width:600px){
     .panel-item{
-        height: 50px;
+        height: 60px;
     }
 }
 @media (max-width:600px) and (min-width:480px){

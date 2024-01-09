@@ -16,8 +16,10 @@ for(let i = 0; i < 4; i++){
         for(let j = 0; j < 4; j++){
             if (!panelItems[j].classList.contains('hide')) panelItems[j].classList.toggle('hide');
         }
+
+        panelItems[i].classList.remove('fade-animation');
+        panelItems[i].classList.add('fade-animation');
         panelItems[i].classList.toggle('hide');
-        console.log("Hello");
     })
 }
 
