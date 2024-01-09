@@ -26,3 +26,11 @@ for(let i = 0; i < 4; i++){
 toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('sidebar-open');
 });
+
+const taskboxes = document.querySelectorAll('.task-box');
+const taskPanel = document.querySelector('.detailed-task-panel')
+for(let i = 0; i < taskboxes.length; i++){
+    taskboxes[i].addEventListener('click', function(){
+        taskPanel.classList.toggle('detailed-task-panel-open')
+    })
+}
