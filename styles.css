@@ -133,12 +133,19 @@ body{
     -ms-overflow-style: none;
     scrollbar-width: none; 
 }
-
-.add-task{
+.task-container-show{
     position: relative;
+    height: 100%;
+    /* border: solid; */
+}
+.add-task{
+    position: absolute;
+    
     display: flex;
     align-items: center;
     height: 50px;
+    bottom: -50px;
+    width: 100%;
 }
 .get-task{
     height: 100%;
