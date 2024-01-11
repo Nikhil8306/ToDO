@@ -27,10 +27,14 @@ toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('sidebar-open');
 });
 
-const taskboxes = document.querySelectorAll('.task-box');
+const closeTask = document.querySelector('.close-task-panel')
+const taskboxes = document.querySelectorAll('.task-det');
 const taskPanel = document.querySelector('.detailed-task-panel')
 for(let i = 0; i < taskboxes.length; i++){
     taskboxes[i].addEventListener('click', function(){
         taskPanel.classList.toggle('detailed-task-panel-open')
     })
 }
+closeTask.addEventListener('click', function(){
+    taskPanel.classList.remove('detailed-task-panel-open')
+})

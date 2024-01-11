@@ -17,6 +17,8 @@ body{
     align-items: center;
     background-color: #F1EAFF;
     height: 100vh;
+    height: 100dvh;
+    height: 100svh;
 }
 #header{
     /* position: absolute; */
@@ -46,6 +48,7 @@ body{
     display: flex;
     width: 100%;
     height: 100%;
+    
 }
 
 .side-panel{
@@ -111,7 +114,7 @@ body{
     padding-left: 100px;
     padding-right: 100px;
     /* border: solid; */
-    width: 100%
+    width: 100%;
 }
 .content-head{
     height: 100px;
@@ -262,19 +265,29 @@ body{
     /* visibility: none; */
 }
 .detailed-task-panel{
-    /* visibility: hidden; */
+    visibility: hidden;
+    /* display: none; */
+    width: 0px;
     z-index: 8;
     position: absolute;
     right: 0;
     height: 100%;
     border-left: solid white 2px;
     background-color: #d7c4fd;
-    transition: width 1s;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+}
+.task-description{
+    resize: none;
 }
 .detailed-task-panel-open{
-    /* visibility: visible; */
+    visibility: visible;
+    /* display: flex; */
     width: 40rem;
-    transition: width 1s;
+    transition: width 0.3s;
 }
 .close-task-panel{
     position: absolute;
