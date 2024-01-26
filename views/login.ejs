@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+        </div>
+
+        <div class="login-container">
+            <div class="login-title">
+                Login
+            </div>
+            <div class="login-mssg">
+                Login to your account to access your tasks
+            </div>
+            <hr>
+            <form action="" class="sub-form" method="post">
+                <div class="mailBox"><input name="username" type="text" class="usermail" placeholder="Your Email or Username">
+                    <div class="usermail-error error">
+                    </div>
+                </div>
+                
+                <br>
+                <div class="passBox">
+                    <input name="password" type="password" class="password" placeholder="Your Password">
+                    <div class="password-error error">
+                    </div>
+                </div>
+                
+                <div class="forget-pass">
+                    <a href="">Forget Password?</a>
+                </div>
+
+                <input type="submit" class="submit-btn" value="Login">
+                <div class="no-acc">
+                    <div class="no-acc-info">
+                        Don't have an account? <a href="/register">register</a>
+                    </div>
+                </div>
+            </form> 
+
+
+        </div>
+    </div>
+    
+</body>
+</html>
