@@ -19,6 +19,9 @@
             <div class="motivation">Live what you do</div>
         </div>
         <div class="workspaces">
+            <div class="notification hide-notification">
+                
+            </div>
             <div class="side-panel sidebar-open">
                 <div class="profile"></div>
                 <button class="panel-item home">Home</button>
@@ -101,21 +104,44 @@
                     </div>
                     <div class="comm-container-show">
                         <div class="content-body comm-body">
-                        <div class="comm-box">
-                            <div class="comm-det">
-                                <div class="comm-name"> 
-                                    TOish
+                            <div class="comm-box">
+                                <div class="comm-det">
+                                    <div class="comm-name"> 
+                                        TOish
+                                    </div>
+                                    <div class="other-details">
+                                        <div class="isadmin">admin</div>
+                                    </div>
                                 </div>
-                                <div class="other-details">
-                                    <div class="isadmin">admin</div>
-                                </div>
+                                <div class="completion-status">pending</div>
+                                <div class="comm-box-2"></div>
                             </div>
-                            <div class="completion-status">pending</div>
-                            <div class="comm-box-2"></div>
                         </div>
+                        <button class="add-comm-btn">Add New Community</button>
+
+                        <div  onsubmit="return false;" class="add-community hide">
+                            <form action="" method="POST" class="add-comm-form">
+                                <label for="commInputName" class="comm_label">Community Name:</label><br>
+                                <input type="text" name="commInputName" placeholder="Enter Community name"><br>
+                                <label for="commDescription" class="comm_label">Description:</label><br>
+                                <textarea name="commDescription" id="" placeholder="Write about this community"></textarea><br>
+                                <label for="addMember" class="comm_label">Add Member:</label><br>
+                                <div class="add-member-div">
+                                    <input class="add-member-input" type="text" name="addMember" id="" placeholder="Enter mail of members">
+                                    <button class="add-member">Add</button>
+                                </div>
+                                 <br>
+                                <label for="startDate" class="comm_label">Start Date:</label><br>
+                                <input type="date" name="startDate" id=""><br>
+                                <label for="endDate" class="comm_label">End Date:</label><br>
+                                <input type="date" name="endDate" id="">
+                                <button class="save-community" value="add-community">Add Community</button>
+                            </form>
+                        </div>
+
                     </div>
-                    <button class="add-comm">Add New Community</button>
-                </div>
+
+                    
                 </div>
 
             </div>

@@ -8,9 +8,9 @@ fetchPersonalTasks()
 myTasksBtn.addEventListener("click", function(){
     fetchPersonalTasks()
 })
-addTaskBtn.addEventListener("click", function(){
+addTaskBtn.addEventListener("click", async function(){
     if (addTaskInp.value.length > 0){
-        fetch('board/tasks', {
+        const data = await fetch('board/tasks', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -19,6 +19,10 @@ addTaskBtn.addEventListener("click", function(){
             },
             body: JSON.stringify({title:addTaskInp.value,description:"",reminder:false})
         })
+        if (data.status !== 200){
+            showNotification("Something went wrong, task not added")
+            return
+        }
         fetchPersonalTasks()
     }
 })
@@ -34,7 +38,10 @@ async function fetchPersonalTasks(){
             "workarea":'Personal'
         }
     })
-    
+    if (res.status !== 200){
+        showNotification("Cannot load your tasks")
+        return
+    }
     const tasks = await res.json()
     loadingBar.classList.toggle("display-loading")
     for(let i = 0; i < tasks.length; i++){

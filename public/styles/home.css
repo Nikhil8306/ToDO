@@ -30,6 +30,32 @@ body{
     background-color: #ad89f3;
     border-bottom: solid white 2px;
 }
+.notification{
+    width: 300px;
+    /* height: 150px; */
+    opacity: 1;
+    position: absolute;
+    border:solid rgb(104, 103, 103) 2px;
+    z-index: 15;
+    right: 10px;
+    border-radius: 5px;
+    background-color: #d7c4fd88;
+    backdrop-filter: blur(8px);
+    font-size: 1rem;
+    transition-property: width, height, opacity, font-size;
+    transition-duration: 0.4s;
+    padding: 0.5rem;
+}
+.hide-notification{
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    opacity:0;
+
+    font-size: 0px;
+    transition-property: width, height, opacity, font-size;
+    transition-duration: 0.4s;
+}
 .loading{
     position: absolute;
     display: none;
@@ -146,7 +172,7 @@ body{
 }
 .content-body{
     /* border: solid; */
-    height: calc(100vh - 48px - 150px);
+    height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -154,9 +180,11 @@ body{
 }
 .task-container-show, .comm-container-show{
     position: relative;
-    height: 100%;
+    height: calc(100vh - 48px - 150px);
+    width: 100%;
     /* border: solid; */
 }
+
 .add-task{
     position: absolute;
     
@@ -166,7 +194,7 @@ body{
     bottom: -50px;
     width: 100%;
 }
-.add-comm{
+.add-comm-btn{
     position: absolute;
     display: flex;
     align-items: center;
@@ -341,6 +369,80 @@ body{
     color: rgb(116, 116, 116);
     transition: color 0.15s;
 }
+.add-community{
+    /* background-color: #d7c4fd; */
+    /* border: solid white 2px; */
+    display: flex;
+    height: 100%;
+    width: 50rem;
+    display: flex;
+    /* margin: 0 auto; */
+
+    display: flex;
+    padding: 1.2rem;
+}
+.add-comm-form{
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+.add-comm-form::-webkit-scrollbar {
+    display: none;
+}
+.add-comm-form label{
+    font-size: 1.2rem;
+}
+.add-comm-form input, .add-comm-form textarea{
+    border: none;
+    outline: none;
+    border-bottom: solid rgb(104, 103, 103) 2px;
+    /* border-radius: 4px; */
+    background-color: #F1EAFF;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    height: 2rem;
+    width: 100%;
+    font-size: 1.1rem;
+    padding-left: 0.3rem;
+}
+.add-comm-form textarea{
+    border: solid rgba(0, 0, 0, 0.384) 1px;
+    border-bottom: solid rgb(104, 103, 103) 2px;
+    resize: none;
+    height: 6rem;
+    border-radius: 4px;
+}
+.add-member-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 2rem;
+    margin-bottom: 2rem;
+}
+.add-member-div>input{
+    width: 80%;
+}
+.add-member-div>button{
+    width: 15%;
+    height: 110%;
+    border:solid rgb(104, 103, 103) 2px;
+    background: none;
+    border-radius: 4px;
+    background-color: #d7c4fd;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+.save-community{
+    height: 2.1rem;
+    padding: 0 0.5rem;
+    border:solid rgb(104, 103, 103) 2px;
+    background: none;
+    border-radius: 4px;
+    background-color: #d7c4fd;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
 @media (hover: hover){
     
     .panel-item:hover{
@@ -371,10 +473,15 @@ body{
         color: black;
         transition: color 0.15s;
     }
-    .add-comm:hover{
+    .add-comm-btn:hover{
         background-color: #ac8deb;
         transition: background-color 0.2s;
     }
+    .add-member-div>button:hover, .save-community:hover{
+        background-color: #ac8deb;
+        transform: background-color 0.2s;
+    }
+    
 
 }
 @media (hover: none){
@@ -420,6 +527,11 @@ body{
     .task-box:hover .task-box-2{
         width: 15%;
         transition: width 0.2s;
+    }
+}
+@media (max-width:1270px){
+    .add-community{
+        width: 100%;
     }
 }
 @media (max-width:900px) and (min-width:601px){

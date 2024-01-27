@@ -8,6 +8,7 @@ const statPage = document.querySelector('.statistics-content');
 const taskPage = document.querySelector('.task-content');
 const comPage = document.querySelector('.community-content');
 
+const notification = document.querySelector('.notification');
 const buttons = document.querySelectorAll('.panel-item');
 
 const panelItems = [homePage, statPage, comPage, taskPage];
@@ -28,6 +29,10 @@ toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('sidebar-open');
 });
 
+notification.addEventListener('click', function() {
+    notification.classList.add('hide-notification')
+})
+
 const closeTask = document.querySelector('.close-task-panel')
 const taskPanel = document.querySelector('.detailed-task-panel')
 
@@ -35,3 +40,10 @@ closeTask.addEventListener('click', function(){
     taskPanel.classList.remove('detailed-task-panel-open')
 })
 
+function showNotification(message){
+    notification.innerHTML = message
+    notification.classList.remove('hide-notification')
+    setTimeout(function(){
+        notification.classList.add('hide-notification')
+    }, 5000)
+}

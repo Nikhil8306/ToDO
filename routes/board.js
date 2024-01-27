@@ -8,7 +8,9 @@ const verifyToken = require('../middlewares/verifyJWT.js')
 // Collections
 const User = require('../models/userColl.js')
 const Task = require('../models/tasksColl.js')
-const Workspace = require('../models/workspaceColl.js')
+const Community = require('../models/communityColl.js')
+const GetCommunity = require('../models/getCommColl.js')
+
 
 // Cookie parser
 router.use(cookieParse())
@@ -16,7 +18,6 @@ router.use(cookieParse())
 router.get('/', checkToken, function(req, res){
     res.render('board')
 })
-
 
 router.use(verifyToken)
 
@@ -27,10 +28,10 @@ router.route('/tasks')
     // console.log(req.headers.auth_token, req.headers.workarea)
     try{
         if (req.headers.workarea == 'Personal'){
-            res.json(await Task.find({userId:currUser._id, workArea:'Personal'}))
+            return res.status(200).json(await Task.find({userId:currUser._id, workArea:'Personal'}))
         }
         else{
-            res.json(await Task.find({userId:req.body.userId, workArea:req.body.workspaceId}))
+            return res.status(200).json(await Task.find({userId:req.body.userId, workArea:req.body.workspaceId}))
         }
     }
     
@@ -72,6 +73,56 @@ router.route('/tasks')
 })
 
 
+// Communities
+router.route('/communities')
+.get(function(req, res){
+    res.json({mssg:"successfullly acquired"})
+})
+.post(async function(req, res){
+    try {
+        const currUser = await User.findOne({userName:jwt.decode(req.headers.auth_token).username});
+        const commBody = req.body;
+        const members = commBody.memberId
+        const memberIds = [currUser._id]
+        for(let i = 0; i < members.length; i++){
+            const user = await User.findOne({mail:members[i]});
+            if (user){
+                if (!memberIds.includes(user._id)) memberIds.push(user._id)
+            }
+        }
+        const currComm = await new Community({
+            communityName:commBody.commName,
+            adminId:currUser._id,
+            description:commBody.description,
+            startDate:commBody.startDate,
+            endDate:commBody.endDate,
+            membersId:memberIds
+        }).save()
+
+        for(let i = 0; i < memberIds.length; i++){
+            const user = await GetCommunity.findOne({userId:memberIds[i]});
+            let communities = []
+            if (user){
+                communities = user.communitiesId
+                communities.push(currComm._id)
+                await GetCommunity.findOneAndUpdate({userId:user._id}, {communitiesId:communities})
+            }
+            else{
+                communities.push(currComm.id)
+                await new GetCommunity({
+                    userId:memberIds[i],
+                    communitiesId:communities
+                }).save()
+            }
+        }
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({mssg:"Something went wrong"})
+        return
+    }
+    res.status(200).json({mssg:"success"})
+})
 
 //functions
 

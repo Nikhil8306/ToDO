@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://127.0.0.1:27017/ToDo')
 
-const workSchema = mongoose.Schema({
-    workspaceName:{
+const commSchema = mongoose.Schema({
+    communityName:{
         type:String
     },
     membersId:[{
-        type:mongoose.Schema.ObjectId,
+        type:mongoose.ObjectId,
         ref:'users'
     }],
     adminId:mongoose.Schema.ObjectId,
@@ -21,4 +21,4 @@ const workSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('workspaces', workSchema)
+module.exports = mongoose.model('communities', commSchema)
