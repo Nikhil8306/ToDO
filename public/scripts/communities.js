@@ -28,14 +28,14 @@ saveCommBtn.addEventListener("click", async function(){
         return
     }
 
-    const data = await fetch('/board/communities', {
+    const data = await fetch('/board/workspaces', {
         headers:{
             'Content-Type': 'application/json',
             auth_token:getCookie("auth_token")
         },
         method:'POST',
         body: JSON.stringify({
-            commName:currForm.get('commInputName'),
+            workName:currForm.get('commInputName'),
             memberId:members,
             description:currForm.get('commDescription'),
             startDate:new Date(currForm.get('startDate')),
@@ -44,10 +44,10 @@ saveCommBtn.addEventListener("click", async function(){
     })
 
     if (data.status !== 200){
-        showNotification("Something went wrong, cannot create community properly")
+        showNotification("Something went wrong, cannot create workspace properly")
         return;
     }
-    showNotification("Community Added successfully")
+    showNotification("Workspace Added successfully")
     commBody.classList.remove("hide")
     addCommBtn.classList.remove("hide")
     addCommPage.classList.add("hide")

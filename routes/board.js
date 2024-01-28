@@ -8,8 +8,8 @@ const verifyToken = require('../middlewares/verifyJWT.js')
 // Collections
 const User = require('../models/userColl.js')
 const Task = require('../models/tasksColl.js')
-const Community = require('../models/communityColl.js')
-const GetCommunity = require('../models/getCommColl.js')
+const Workspace = require('../models/workspaceColl.js')
+const UserWorkRel = require('../models/userWorkRelColl.js')
 
 
 // Cookie parser
@@ -73,45 +73,50 @@ router.route('/tasks')
 })
 
 
-// Communities
-router.route('/communities')
+// Workspaces
+router.route('/workspaces')
 .get(function(req, res){
-    res.json({mssg:"successfullly acquired"})
+    res.json({mssg:"successfully acquired"})
 })
 .post(async function(req, res){
     try {
         const currUser = await User.findOne({userName:jwt.decode(req.headers.auth_token).username});
-        const commBody = req.body;
-        const members = commBody.memberId
-        const memberIds = [currUser._id]
+        const workspaceBody = req.body;
+        const members = workspaceBody.memberId
+        members.push(currUser.mail)
+        const currMembers = []
+        const memberIds = []
         for(let i = 0; i < members.length; i++){
             const user = await User.findOne({mail:members[i]});
             if (user){
-                if (!memberIds.includes(user._id)) memberIds.push(user._id)
+                if (currMembers.includes(members[i])) continue
+                memberIds.push(user._id)
+                currMembers.push(members[i])
             }
         }
-        const currComm = await new Community({
-            communityName:commBody.commName,
+        const currWorkspace = await new Workspace({
+            workspaceName:workspaceBody.workName,
             adminId:currUser._id,
-            description:commBody.description,
-            startDate:commBody.startDate,
-            endDate:commBody.endDate,
+            description:workspaceBody.description,
+            startDate:workspaceBody.startDate,
+            endDate:workspaceBody.endDate,
             membersId:memberIds
         }).save()
 
         for(let i = 0; i < memberIds.length; i++){
-            const user = await GetCommunity.findOne({userId:memberIds[i]});
-            let communities = []
+            const user = await UserWorkRel.findOne({userId:memberIds[i]})
+
             if (user){
-                communities = user.communitiesId
-                communities.push(currComm._id)
-                await GetCommunity.findOneAndUpdate({userId:user._id}, {communitiesId:communities})
+                const workspaces = user.workspacesId
+                workspaces.push(currWorkspace._id)
+
+                await UserWorkRel.findOneAndUpdate({userId:memberIds[i]}, {workspacesId:workspaces})
             }
             else{
-                communities.push(currComm.id)
-                await new GetCommunity({
+                const workspaces = [currWorkspace._id]
+                await new UserWorkRel({
                     userId:memberIds[i],
-                    communitiesId:communities
+                    workspacesId:workspaces
                 }).save()
             }
         }
