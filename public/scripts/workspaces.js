@@ -12,6 +12,7 @@ commBtn.addEventListener("click", function(){
     commBody.classList.remove("hide")
     addCommBtn.classList.remove("hide")
     addCommPage.classList.add("hide")
+    fetchCommunities()
 })
 
 addCommBtn.addEventListener("click", function(){
@@ -28,7 +29,7 @@ saveCommBtn.addEventListener("click", async function(){
         return
     }
 
-    const data = await fetch('/board/workspaces', {
+    const data = await fetch(baseUrl+'/board/workspaces', {
         headers:{
             'Content-Type': 'application/json',
             auth_token:getCookie("auth_token")
@@ -47,6 +48,7 @@ saveCommBtn.addEventListener("click", async function(){
         showNotification("Something went wrong, cannot create workspace properly")
         return;
     }
+    fetchCommunities()
     showNotification("Workspace Added successfully")
     commBody.classList.remove("hide")
     addCommBtn.classList.remove("hide")
@@ -62,6 +64,49 @@ addMemberBtn.addEventListener('click', function(){
     addMemberInp.value = ""
 })
 
+async function fetchCommunities(){
+    loadingBar.classList.add("display-loading")
+    const data = await fetch(baseUrl+'board/workspaces', {
+        method:"GET",
+        headers:{
+            auth_token:getCookie("auth_token")
+        }
+    })
+
+    loadingBar.classList.remove('display-loading')
+
+    if (data.status !== 200){
+        showNotification("Cannot load Workspaces")
+        return
+    }
+    const workspaces = await data.json()
+    commBody.innerHTML = '<div class="task-box invisible-task-box"></div>'
+    for(let i = 0; i < workspaces.length; i++){
+        commBody.prepend(addCommunityBox(workspaces[i].name, workspaces[i].admin, "pending"))
+    }
+}
+
+function addCommunityBox(name, isAdmin, status){
+    let admin = ""
+    if (isAdmin) admin='admin'
+    let access = "leave"
+    if (isAdmin) access = "Delete"
+    let commBox = document.createElement("div")
+    commBox.innerHTML = `
+    <div class="comm-det">
+        <div class="comm-name"> 
+            ${name}
+        </div>
+        <div class="other-details">
+            <div class="isadmin">${admin}</div>
+        </div>
+    </div>
+    <div class="completion-status">${status}</div>
+    <div class="comm-box-2">${access}</div>
+    `
+    commBox.classList.add('comm-box')
+    return commBox
+}
 function validForm(form){
     for (const [key, value] of form) {
         if (key != 'addMember' && value == "") return false

@@ -8,9 +8,10 @@ fetchPersonalTasks()
 myTasksBtn.addEventListener("click", function(){
     fetchPersonalTasks()
 })
+
 addTaskBtn.addEventListener("click", async function(){
     if (addTaskInp.value.length > 0){
-        const data = await fetch('board/tasks', {
+        const data = await fetch(baseUrl+'board/tasks', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -29,9 +30,9 @@ addTaskBtn.addEventListener("click", async function(){
 
 // Functions
 async function fetchPersonalTasks(){
-    loadingBar.classList.toggle("display-loading")
-    taskBody.innerHTML = `<div class="task-box invisible-task-box"></div>`
-    const res = await fetch('board/tasks', {
+    loadingBar.classList.add("display-loading")
+    
+    const res = await fetch(baseUrl+'board/tasks', {
         method : 'GET',
         headers:{
             "auth_token":getCookie("auth_token"),
@@ -39,11 +40,13 @@ async function fetchPersonalTasks(){
         }
     })
     if (res.status !== 200){
+        loadingBar.classList.remove("display-loading")
         showNotification("Cannot load your tasks")
         return
     }
+    taskBody.innerHTML = `<div class="task-box invisible-task-box"></div>`
     const tasks = await res.json()
-    loadingBar.classList.toggle("display-loading")
+    loadingBar.classList.remove("display-loading")
     for(let i = 0; i < tasks.length; i++){
         taskBody.prepend(taskBox(tasks[i].title, "10 feb", true, "pending"))
     }
@@ -72,19 +75,4 @@ function taskBox(taskName, dueDate, isHabit, taskStatus){
         taskPanel.classList.toggle('detailed-task-panel-open')
     })
     return box
-}
-
-
-function getCookie(c){
-    // console.log(document.cookie)
-    let value = ""
-    document.cookie.split(';').forEach(function(el) {
-        let [key,v] = el.split('=');
-        if (key == c){
-            value = v
-            return
-        }
-    })
-    return value
-    
 }

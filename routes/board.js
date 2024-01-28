@@ -75,8 +75,36 @@ router.route('/tasks')
 
 // Workspaces
 router.route('/workspaces')
-.get(function(req, res){
-    res.json({mssg:"successfully acquired"})
+.get(async function(req, res){
+    try{
+        const currUser = await User.findOne({userName:jwt.decode(req.headers.auth_token).username});
+        const workspaces = (await UserWorkRel.findOne({userId:currUser._id})).workspacesId
+
+        const workData = []
+        for(let i = 0; i < workspaces.length; i++){
+            const currWorkspace = await Workspace.findOne({_id:workspaces[i]})
+
+            if (currWorkspace){
+                let admin = false;
+
+                if (String(currWorkspace.adminId) == String(currUser._id)) admin = true
+                data = {
+                    name:currWorkspace.workspaceName,
+                    admin:admin,
+                    startDate:currWorkspace.startDate,
+                    endDate:currWorkspace.endDate
+                }
+                workData.push(data)
+            }
+
+        }
+        res.status(200).json(workData)
+        
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({"mssg":"Something went wrong"})
+    }
 })
 .post(async function(req, res){
     try {
