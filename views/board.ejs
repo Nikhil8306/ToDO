@@ -32,10 +32,27 @@
             </div>
             <div class="content">
                 <div class="loading">Loading...</div>
-                <div class="detailed-task-panel">
-                    <button class="close-task-panel">></button>
-                    <input type="text" class="task-title">
-                    <textarea class="task-description" id="" cols="30" rows="5"></textarea>
+
+                <div class="detail-panel">
+                    <button class="close-panel">></button>
+                    
+                    <div class="task-details-panel hide">
+                        <label for="taskDetails">Task Title:</label>
+                        <input type="text" name="taskDetails" class="taskDetails">
+                        <label for="taskDescription">Description:</label>
+                        <textarea name="taskDescription" id="" cols="30" rows="10" class="taskDescription"></textarea>
+                        <div class="is-important">
+                            <input type="checkbox" name="isImportant" class="isImportant">
+                            <label for="isImportant"> Important</label>
+                        </div>
+                        <div class="repeat-daily">
+                            <input type="checkbox" name="dailyRepeat" id="" class="repeatDaily">
+                            <label for="dailyRepeat">Repeat Daily</label>
+                        </div>
+                        <label for="dueTime">Due Time:</label>
+                        <input type="datetime-local" name="dueTime" class="taskDueTime" id="">
+                        <button class="saveTask">Save</button>
+                    </div>
                     
                 </div>
 
@@ -76,17 +93,7 @@
                     </div>
                     
                         <div class="content-body home-body">
-                            <div class="stat-chart">
-
-                            </div>
-                            <div class="home-content-2">
-                                <div class="home-tasks">
-
-                                </div>
-                                <div class="home-comm">
-
-                                </div>
-                            </div>
+                            
 
                         </div>
                 </div>

@@ -80,10 +80,12 @@ async function fetchCommunities(){
         return
     }
     const workspaces = await data.json()
+    
     commBody.innerHTML = '<div class="task-box invisible-task-box"></div>'
     for(let i = 0; i < workspaces.length; i++){
         commBody.prepend(addCommunityBox(workspaces[i].name, workspaces[i].admin, "pending"))
     }
+    
 }
 
 function addCommunityBox(name, isAdmin, status){

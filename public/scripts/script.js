@@ -11,6 +11,7 @@ const comPage = document.querySelector('.community-content');
 const notification = document.querySelector('.notification');
 const buttons = document.querySelectorAll('.panel-item');
 
+
 const panelItems = [homePage, statPage, comPage, taskPage];
 
 const baseUrl = ''
@@ -35,11 +36,12 @@ notification.addEventListener('click', function() {
     notification.classList.add('hide-notification')
 })
 
-const closeTask = document.querySelector('.close-task-panel')
-const taskPanel = document.querySelector('.detailed-task-panel')
+const closeTask = document.querySelector('.close-panel')
+const detailPanel = document.querySelector('.detail-panel')
 
 closeTask.addEventListener('click', function(){
-    taskPanel.classList.remove('detailed-task-panel-open')
+    detailPanel.classList.remove('detail-panel-open')
+    taskDetailPanel.classList.add('hide')
 })
 
 // Functions

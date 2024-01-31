@@ -59,9 +59,10 @@ router.route('/tasks')
             workArea:workArea,
             workspaceId:workspaceId,
             userId:userId,
-            reminder:taskBody.reminder,
-            startDate:taskBody.startDate,
-            endDate:taskBody.endDate
+            isImportant:taskBody.isImportant,
+            repeatDaily:taskBody.repeatDaily,
+            dueDate:taskBody.dueDate,
+            dueTime:taskBody.dueTime
         }).save()
     }
     catch(err){
@@ -69,17 +70,40 @@ router.route('/tasks')
         return res.status(400).json({mssg:"Didn't saved the data"})
     }
     
-    res.status(200).json({"mssg":"Success"})
+    res.status(200).json({"msg":"Success"})
 })
+.patch(async function(req, res){
+    const taskBody = req.body
+    
+    try{
+        const taskId = req.body.taskId
 
+        await Task.findOneAndUpdate({_id:taskId},
+            {
+                title:req.body.title,
+                description:req.body.description,
+                dueTime:req.body.dueTime,
+                isImportant:req.body.isImportant,
+                repeatDaily:req.body.repeatDaily
+            })
+        res.status(200).json({mssg:"Success"})
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({msg:"Cannot update"})
+    }
+})
 
 // Workspaces
 router.route('/workspaces')
 .get(async function(req, res){
     try{
         const currUser = await User.findOne({userName:jwt.decode(req.headers.auth_token).username});
-        const workspaces = (await UserWorkRel.findOne({userId:currUser._id})).workspacesId
-
+        const workspacesM = (await UserWorkRel.findOne({userId:currUser._id}))
+        if (!workspacesM){
+            return res.status(200).json({mss:"No Data"})
+        }
+        const workspaces = workspacesM.workspacesId
         const workData = []
         for(let i = 0; i < workspaces.length; i++){
             const currWorkspace = await Workspace.findOne({_id:workspaces[i]})

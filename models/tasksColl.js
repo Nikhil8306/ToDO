@@ -8,14 +8,9 @@ const taskSchema = mongoDB.Schema({
     workArea:String,
     workspaceId:mongoDB.Schema.ObjectId,
     userId:mongoDB.Schema.ObjectId,
-    reminder:Boolean,
-    startDate:{
-        type:Date,
-        default:Date.now
-    },
-    endDate:{
-        type:Date,
-    }
+    dueTime:Date,
+    isImportant:Boolean,
+    repeatDaily:Boolean
 })
 
 const taskModel = mongoDB.model("tasks", taskSchema);

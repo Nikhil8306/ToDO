@@ -17,8 +17,7 @@ body{
     align-items: center;
     background-color: #F1EAFF;
     height: 100vh;
-    height: 100dvh;
-    height: 100svh;
+
 }
 #header{
     /* position: absolute; */
@@ -36,7 +35,7 @@ body{
     opacity: 1;
     position: absolute;
     border:solid rgb(104, 103, 103) 2px;
-    z-index: 15;
+    z-index: 25;
     right: 10px;
     border-radius: 5px;
     background-color: #d7c4fd88;
@@ -59,12 +58,14 @@ body{
 .loading{
     position: absolute;
     display: none;
+    
     /* background-color: rgba(148, 148, 148, 0); */
 }
 .display-loading{
     display: block;
     /* filter: blur(8); */
-    background-color: rgba(202, 199, 199, 0.479);
+    background-color: rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(8px);
     right: 0;
     width: 100%;
     height: 100%;
@@ -104,7 +105,7 @@ body{
     visibility: hidden;
     font-size: 1.1rem;
     font-weight: 500;
-    z-index: 10;
+    z-index: 20;
 }
 .panel-item{
     background: none;
@@ -240,7 +241,68 @@ body{
     border-left: solid white 2px;
     transition: background-color 0.15s;
 }
+.task-details-panel{
+    /* border: solid; */
+    padding: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
+.task-details-panel input, .task-details-panel textarea{
+    height: 2rem;
+    background: none;
+    font-size: 1.1rem;
+    padding-left: 0.2rem;
+    outline: none;
+    border: none;
+    border-bottom: solid rgb(83, 83, 83) 2px;
+    margin-bottom: 2rem;
+}
+.task-details-panel textarea{
+    resize: none;
+    height: 6rem;
+    
+    border: solid rgb(80, 80, 80) 1px;
+    border-bottom: solid rgb(77, 77, 77) 2px;
+}
+.task-details-panel label{
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+.task-details-panel > button{
+    margin-top: 1rem;
+    height: 2rem;
+    width: 10rem;
+    padding: 0 0.5rem;
+    border:solid rgb(104, 103, 103) 2px;
+    background: none;
+    border-radius: 4px;
+    background-color: #d7c4fd;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+.is-important, .repeat-daily{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+.is-important>input, .repeat-daily>input{
+    margin:auto 0;
+    appearance: none;
+    height: 1rem;
+    border-radius: 5px;
+    border: 2px solid rgb(73, 73, 73);
+    width: 1rem;
+    transition: 100ms ease-in;
+    cursor: pointer;
+}
+.is-important>input:checked, .repeat-daily>input:checked{
+    border: solid #ac8deb;
+    background-color: #ac8deb;
+    transition: 100ms;
+}
 .home-body{
     display: flex;
     flex-direction: column;
@@ -291,6 +353,8 @@ body{
     z-index: 1;
     width: 0;
     height: 100%;
+    background: none;
+    border: none;
     background-color: rgb(238, 81, 81);
     display: flex;
     align-items: center;
@@ -333,32 +397,45 @@ body{
     opacity: 0;
     /* visibility: none; */
 }
-.detailed-task-panel{
-    visibility: hidden;
+.detail-panel{
+    /* visibility: hidden; */
     /* display: none; */
     width: 0px;
     z-index: 8;
     position: absolute;
     right: 0;
+    opacity:0;
     height: 100%;
     border-left: solid white 2px;
-    background-color: #d7c4fd;
-    transition: 0.3s;
+    background-color: #d7c4fd3d;
+    backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
     padding: 2rem;
-
+    transition-property: width, opacity;
+    transition-duration: 0.2s;
+    overflow-y:scroll;
+}
+.detail-panel{
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+.detail-panel::-webkit-scrollbar {
+    display: none;
 }
 .task-description{
     resize: none;
 }
-.detailed-task-panel-open{
-    visibility: visible;
+.detail-panel-open{
+    /* visibility: visible; */
     /* display: flex; */
     width: 40rem;
-    transition: width 0.3s;
+    opacity: 1;
+    transition-property: width, opacity;
+    transition-duration: 0.2s;
 }
-.close-task-panel{
+.close-panel{
     position: absolute;
     top: 0.2rem;
     left: 0.2rem;
@@ -469,7 +546,7 @@ body{
         width: 80%;
         transition: width 0.2s;
     }
-    .close-task-panel:hover{
+    .close-panel:hover{
         color: black;
         transition: color 0.15s;
     }
@@ -481,7 +558,10 @@ body{
         background-color: #ac8deb;
         transform: background-color 0.2s;
     }
-    
+    .task-details-panel>button:hover{
+        background-color: #ac8deb;
+        transition: background-color 0.2s;
+    }
 
 }
 @media (hover: none){
@@ -534,6 +614,12 @@ body{
         width: 100%;
     }
 }
+@media (max-width:1000px){
+    .detail-panel-open{
+        width: 32rem;
+    }
+}
+
 @media (max-width:900px) and (min-width:601px){
     html{
         font-size: 14px;
@@ -587,6 +673,10 @@ body{
     .panel-item{
         height: 60px;
     }
+    .detail-panel-open{
+        width: 30rem;
+        backdrop-filter: blue(13px);
+    }
 }
 @media (max-width:600px) and (min-width:480px){
     html{
@@ -607,6 +697,11 @@ body{
         padding-right: 30px;
     }
 
+}
+@media (max-width:500px){
+    .detail-panel-open{
+        width: 100vw;
+    }
 }
 @media (max-width:479px){
     html{
