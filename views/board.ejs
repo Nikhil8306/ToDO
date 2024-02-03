@@ -30,9 +30,19 @@
                 <button class="panel-item my-task">My Tasks</button>
                 <button type="button" class="side-toggle">|</button>
             </div>
+            <div class="warning">
+                <div class="warning-box">
+                    <div class="warning-message">This is a warning</div>
+                    <div class="warning-choices">
+                        <button class="warning-no">NO</button>
+                        <button class="warning-yes">YES</button>
+                    </div>
+
+                </div>
+            </div>
             <div class="content">
                 <div class="loading">Loading...</div>
-
+                
                 <div class="detail-panel">
                     <button class="close-panel">></button>
                     
@@ -42,7 +52,7 @@
                         <label for="taskDescription">Description:</label>
                         <textarea name="taskDescription" id="" cols="30" rows="10" class="taskDescription"></textarea>
                         <div class="is-important">
-                            <input type="checkbox" name="isImportant" class="isImportant">
+                            <input type="checkbox" name="isImportant" class="isImportant" id="isImportant">
                             <label for="isImportant"> Important</label>
                         </div>
                         <div class="repeat-daily">
@@ -80,8 +90,10 @@
                     <div class="add-task">
                         <div class="bottom-fade"></div>
                         <div class="get-task">
-                            <input type="addTask" placeholder="Add Task" class="add-task-field">
-                            <button type="button" class="add-task-button">Add</button>
+                            <form action="" class="get-task-form" onsubmit="return null">
+                                <input type="addTask" placeholder="Add Task" class="add-task-field" id="add-task-field">
+                                <input type="submit" for="add-task-field" class="add-task-button" value="Add">
+                            </form>
                         </div>
                     </div>
                     </div>

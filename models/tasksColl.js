@@ -10,7 +10,8 @@ const taskSchema = mongoDB.Schema({
     userId:mongoDB.Schema.ObjectId,
     dueTime:Date,
     isImportant:Boolean,
-    repeatDaily:Boolean
+    repeatDaily:Boolean,
+    isCompleted:Boolean,
 })
 
 const taskModel = mongoDB.model("tasks", taskSchema);

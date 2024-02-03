@@ -62,7 +62,8 @@ router.route('/tasks')
             isImportant:taskBody.isImportant,
             repeatDaily:taskBody.repeatDaily,
             dueDate:taskBody.dueDate,
-            dueTime:taskBody.dueTime
+            dueTime:taskBody.dueTime,
+            isCompleted:false
         }).save()
     }
     catch(err){
@@ -73,8 +74,6 @@ router.route('/tasks')
     res.status(200).json({"msg":"Success"})
 })
 .patch(async function(req, res){
-    const taskBody = req.body
-    
     try{
         const taskId = req.body.taskId
 
@@ -84,16 +83,32 @@ router.route('/tasks')
                 description:req.body.description,
                 dueTime:req.body.dueTime,
                 isImportant:req.body.isImportant,
-                repeatDaily:req.body.repeatDaily
+                repeatDaily:req.body.repeatDaily,
+                isCompleted:req.body.isCompleted
             })
+
         res.status(200).json({mssg:"Success"})
+
     }
     catch(err){
         console.log(err)
         res.status(400).json({msg:"Cannot update"})
     }
 })
+.delete(async function(req, res){
+    try{
+        const taskId = req.body.taskId
 
+        await Task.deleteOne({_id:taskId})
+
+        res.status(200).json({mssg:"Success"})
+
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({mssg:"Cannot delete"})
+    }
+})
 // Workspaces
 router.route('/workspaces')
 .get(async function(req, res){

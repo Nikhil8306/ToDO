@@ -64,3 +64,24 @@ function getCookie(c){
     })
     return value
 }
+
+const warning = document.querySelector('.warning')
+const warningText = document.querySelector('.warning-message')
+const warningNo = document.querySelector('.warning-no');
+const warningYes = document.querySelector('.warning-yes');
+
+function showWarning(mssg){
+    warning.classList.add('show-warning')
+    warningText.innerHTML = mssg
+
+    return new Promise(function(resolve,reject){
+        warningNo.addEventListener('click', function(){
+            warning.classList.remove('show-warning')
+            resolve("no")
+        })
+        warningYes.addEventListener('click', function(){
+            warning.classList.remove('show-warning')
+            resolve("yes")
+        })
+    })
+}
