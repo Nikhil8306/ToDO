@@ -8,8 +8,7 @@ const userSchema = mongoDB.Schema({
     password:String,
     firstName:String,
     lastName:String,
-    age:Number,
-    occupation:String
+
 })
 
 const userModel = mongoDB.model("users", userSchema);

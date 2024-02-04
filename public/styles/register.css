@@ -62,13 +62,18 @@
     /* padding: 0 60px; */
     height: 100%;
     /* border: solid; */
-    padding-top: 40px;
+    padding-top: 10px;
+    gap: 0.8rem;
 }
 .sub-form>.submit-btn{
-    margin-top: 45px;
+    margin-top: 20px;
     font-size: 1.2rem;
     font-weight: 500;
     background-color: #c4abf7;
+}
+.name-input{
+    display: flex;
+    gap: 0.3rem;
 }
 .sub-form input{
     width: 100%;
@@ -134,7 +139,7 @@
     }
 }
 @media (max-width: 350px){
-    .sub-form>input{
+    .sub-form input{
         height: 40px;
     }
 }

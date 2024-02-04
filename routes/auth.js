@@ -63,7 +63,7 @@ router.route('/register')
     res.render("register")
 })
 .post( async function(req, res){
-    const {mail, username, password} = req.body;
+    const {mail, firstName, lastName, username, password} = req.body;
     if (!mailSchema.safeParse(mail).success){
         return res.json({mail_err:"Invalid email address"})
     }
@@ -72,6 +72,8 @@ router.route('/register')
 
     const hashed = await bcrypt.hash(password, saltRound);
     await new users({
+        firstName:firstName,
+        lastName:lastName,
         userName:username,
         mail:mail,
         password:hashed

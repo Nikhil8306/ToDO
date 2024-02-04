@@ -24,10 +24,10 @@
             </div>
             <div class="side-panel sidebar-open">
                 <div class="profile"></div>
-                <button class="panel-item home">Home</button>
-                <button class="panel-item stat">Statistics</button>
-                <button class="panel-item communities">Communities</button>
-                <button class="panel-item my-task">My Tasks</button>
+                <button class="panel-item home">🏠 Home</button>
+                <button class="panel-item stat">📈 Statistics</button>
+                <button class="panel-item communities">🥂 Workspaces</button>
+                <button class="panel-item my-task">🎯 My Tasks</button>
                 <button type="button" class="side-toggle">|</button>
             </div>
             <div class="warning">
@@ -44,19 +44,19 @@
                 <div class="loading">Loading...</div>
                 
                 <div class="detail-panel">
-                    <button class="close-panel">></button>
+                    <button class="close-panel">»</button>
                     
                     <div class="task-details-panel hide">
                         <label for="taskDetails">Task Title:</label>
-                        <input type="text" name="taskDetails" class="taskDetails">
+                        <input type="text" name="taskDetails" id="taskDetails" class="taskDetails">
                         <label for="taskDescription">Description:</label>
-                        <textarea name="taskDescription" id="" cols="30" rows="10" class="taskDescription"></textarea>
+                        <textarea name="taskDescription" id="taskDescription" cols="30" rows="10" class="taskDescription"></textarea>
                         <div class="is-important">
                             <input type="checkbox" name="isImportant" class="isImportant" id="isImportant">
                             <label for="isImportant"> Important</label>
                         </div>
                         <div class="repeat-daily">
-                            <input type="checkbox" name="dailyRepeat" id="" class="repeatDaily">
+                            <input type="checkbox" name="dailyRepeat" id="dailyRepeat" class="repeatDaily">
                             <label for="dailyRepeat">Repeat Daily</label>
                         </div>
                         <label for="dueTime">Due Time:</label>
@@ -138,24 +138,66 @@
                         </div>
                         <button class="add-comm-btn">Add New Workspace</button>
 
-                        <div  onsubmit="return false;" class="add-community hide">
-                            <form action="" method="POST" class="add-comm-form">
+                        <div class="add-community hide">
+                            <form action="" method="POST" onsubmit="return false;" class="add-comm-form">
                                 <label for="commInputName" class="comm_label">Workspace Name:</label><br>
-                                <input type="text" name="commInputName" placeholder="Enter Community name"><br>
+                                <input type="text" name="commInputName" id="commInputName" placeholder="Enter Community name"><br>
                                 <label for="commDescription" class="comm_label">Description:</label><br>
-                                <textarea name="commDescription" id="" placeholder="Write about this community"></textarea><br>
+                                <textarea name="commDescription" id="commDescription" placeholder="Write about this community"></textarea><br>
                                 <label for="addMember" class="comm_label">Add Member:</label><br>
                                 <div class="add-member-div">
-                                    <input class="add-member-input" type="text" name="addMember" id="" placeholder="Enter mail of members">
-                                    <button class="add-member">Add</button>
+                                    <input class="add-member-input" type="text" name="addMember" id="addMember" placeholder="Enter mail of members">
+                                    <input type="submit" class="add-member" value="Add">
                                 </div>
                                  <br>
                                 <label for="startDate" class="comm_label">Start Date:</label><br>
-                                <input type="date" name="startDate" id=""><br>
+                                <input type="date" name="startDate" id="startDate"><br>
                                 <label for="endDate" class="comm_label">End Date:</label><br>
-                                <input type="date" name="endDate" id="">
+                                <input type="date" name="endDate" id="endDate">
                                 <button class="save-community" value="add-community">Add Workspace</button>
                             </form>
+                        </div>
+
+                        <div class="workspace-details hide">
+                            <p class="workspace-task-heading">Your Todo :</p>
+                            <div class="show-members">👤</div>
+                            <div class="members-box">
+                                <div class="close-member-box">❌</div>
+                                <div class="members-list">
+                                    <!-- <button>ab@gmail.com</button> -->
+
+                                </div>
+                            </div>
+                            <div class="workspace-tasks">
+                                <!-- <div class="task-box">
+                                    <div class="task-det">
+                                        <div class="task-name"> 
+                                            <input type="checkbox">
+                                            Do you homework
+                                        </div>
+                                        <div class="other-details">
+                                            <div class="due-date"></div>
+                                            <div class="important-tag"></div>
+                                            <div class="ishabit"></div>
+                                        </div>
+                                    </div>
+                                    <div class="completion-status">pending</div>
+                                    <div class="workspace-task-delete">Delete</div>
+                                </div> -->
+
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="add-task workspace-add-task hide">
+                            <div class="bottom-fade"></div>
+                            <div class="get-task">
+                                <form action="" class="get-task-form" onsubmit="return false">
+                                    <input type="addTask" placeholder="Add Task" class="add-workspace-task-field" id="add-workspace-task-field">
+                                    <input type="submit" for="add-workspace-task-field" class="add-workspace-task-button" value="Add">
+                                </form>
+                            </div>
                         </div>
 
                     </div>

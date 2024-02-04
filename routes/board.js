@@ -25,13 +25,18 @@ router.use(verifyToken)
 router.route('/tasks')
 .get(async function(req, res){
     const currUser = await User.findOne({userName:jwt.decode(req.headers.auth_token).username});
+    let UID = currUser._id
     // console.log(req.headers.auth_token, req.headers.workarea)
     try{
         if (req.headers.workarea == 'Personal'){
             return res.status(200).json(await Task.find({userId:currUser._id, workArea:'Personal'}))
         }
         else{
-            return res.status(200).json(await Task.find({userId:req.body.userId, workArea:req.body.workspaceId}))
+            if (req.headers.userid != "") {
+                UID = req.headers.userid
+            }
+            
+            return res.status(200).json(await Task.find({userId:UID, workspaceId:req.headers.workspaceid}))
         }
     }
     
@@ -50,7 +55,11 @@ router.route('/tasks')
     if (req.headers.workarea != 'Personal'){
         workArea = 'Team';
         workspaceId = req.body.workspaceId;
+        const currWorkspace = await Workspace.findOne({_id:workspaceId});
+
+        if (String(currWorkspace.adminId) != String(currUser._id)) return res.status(401).json({mssg:"cannot add task"})
         userId = req.body.userId;
+        if (req.body.userId == '') userId = currUser._id
     }
     try{
         await new Task({
@@ -109,6 +118,8 @@ router.route('/tasks')
         res.status(400).json({mssg:"Cannot delete"})
     }
 })
+
+
 // Workspaces
 router.route('/workspaces')
 .get(async function(req, res){
@@ -125,15 +136,41 @@ router.route('/workspaces')
 
             if (currWorkspace){
                 let admin = false;
+                const membersMail = []
+                const membersName = []
+                const members = currWorkspace.membersId;
+                // console.log(currWorkspace.workspaceName)
+                for(let j = 0; j < members.length; j++){
+                    let usr = await User.findOne({_id:members[j]})
+                    if (!usr) continue
+                    membersMail.push(usr.mail)
+                    if (String(usr._id) == String(currUser._id)) {
+                        membersName.unshift("You");
+                        const mem = members.splice(j, 1)
+                        members.unshift(mem);
+                    }
+                    else {
+                        membersName.push(usr.firstName + " " + usr.lastName)
+                    }
+                    // console.log(usr)
+                }
 
+                
                 if (String(currWorkspace.adminId) == String(currUser._id)) admin = true
                 data = {
+                    _id:workspaces[i],
                     name:currWorkspace.workspaceName,
                     admin:admin,
                     startDate:currWorkspace.startDate,
-                    endDate:currWorkspace.endDate
+                    endDate:currWorkspace.endDate,
+                    members:members,
+                    membersMail:membersMail,
+                    membersName:membersName
                 }
                 workData.push(data)
+            }
+            else{
+                res.status(400).json({mssg:"No such workspace found"})
             }
 
         }

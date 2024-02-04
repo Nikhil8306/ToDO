@@ -4,7 +4,32 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
+    cursor: default;
 }
+input{
+    cursor:text;
+}
+textarea{
+    cursor: text;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #F1EAFF;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ac8deb;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a07de7;
+  }
 
 #wrapper{
     width: 100%;
@@ -13,8 +38,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #F1EAFF;
-    height: 100lvh;
-
+    height: 100vh;
 }
 #header{
     /* position: absolute; */
@@ -181,7 +205,6 @@
     position: relative;
     height: calc(100vh - 48px - 150px);
     width: 100%;
-    /* border: solid; */
 }
 
 .add-task{
@@ -221,7 +244,7 @@
     width: 100%;
     display: flex;
 }
-.add-task-field{
+.add-task-field, .add-workspace-task-field{
     resize: none;
     border: solid;
     background: none;
@@ -234,7 +257,7 @@
     padding-left: 15px;
     font-family: 'Poppins', sans-serif;
 }
-.add-task-button{
+.add-task-button, .add-workspace-task-button{
     height: 100%;
     width: 100px;
     font-size: 1rem;
@@ -350,7 +373,9 @@
     height: 4rem;
     margin-top: 0.8rem;
     padding-left: 0.8rem;
-
+}
+.comm-box{
+    height: 7rem;
 }
 .task-name>input{
     appearance: none;
@@ -392,6 +417,20 @@
     transition: width 0.2s;
     /* padding-left: 1rem; */
 }
+.workspace-task-delete{
+    right: 0px;
+    z-index: 1;
+    width: 0;
+    height: 100%;
+    background: none;
+    border: none;
+    background-color: rgb(238, 81, 81);
+    display: flex;
+    align-items: center;
+    /* overflow: hidden; */
+    font-size: 1.1rem;
+    transition: width 0.2s;
+}
 .task-det, .comm-det{
     position: relative;
     display: flex;
@@ -407,6 +446,10 @@
 
     height: 1.5rem;
     overflow:hidden;
+}
+.comm-name{
+    height: 2.5rem;
+    font-size: 1.6rem;
 }
 .completion-status{
     width: 10%;
@@ -530,7 +573,7 @@
 .add-member-div>input{
     width: 80%;
 }
-.add-member-div>button{
+.add-member-div>.add-member{
     width: 15%;
     height: 110%;
     border:solid rgb(104, 103, 103) 2px;
@@ -618,7 +661,114 @@
 .show-warning{
     display: flex;
 }
+
+.workspace-details{
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 0.5rem;
+}
+
+.workspace-details>p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    
+}
+.workspace-tasks{
+    position:relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.show-members{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    transition:0.2s;
+}
+.workspace-add-task{
+    display: flex;
+    position: absolute;
+    bottom: -50px;
+}
+.members-box{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 0;
+    height: 0;
+    width: 0;
+    border: solid white 2px;
+    border-radius: 4px;
+    cursor: default;
+    backdrop-filter: blur(8px);
+    z-index: 25;
+    background-color: #bc9ef75d;
+    gap: 0.5rem;
+    opacity: 0;
+    transition-property: width, height, padding, opacity;
+    transition-duration: 0.3s;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.close-member-box{
+    /* border: solid; */
+    width: 2rem;
+    transition: filter 0.2s;
+    
+}
+.show-members-box{
+    width: 100%;
+    height: 20rem;
+    width: 15rem;
+    padding-left: 0.3rem;
+    padding-top: 0.3rem;
+    opacity: 1;
+    transition-property: width, height, padding;
+    transition-duration: 0.3s;
+}
+.members-list{
+    display: flex;
+    flex-direction: column;
+    
+}
+.members-list>button{
+    background: none;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1rem;
+    height: 3rem;
+    border-bottom: solid white 2px;
+    align-items: center;
+    transition: background-color 0.2s;
+}
 @media (hover: hover){
+    .close-member-box:hover{
+        filter:grayscale(40%);
+    }
+    .members-list>button:hover{
+        background-color: #bc9ef7ce;
+        transition: background-color 0.2s;
+    }
+    .show-members:hover{
+        filter: brightness(40%);
+        cursor: default;
+        transition:0.2s;
+    }
     .delete-task-btn{
         display: none;
     }
@@ -632,16 +782,17 @@
         color: black;
         transition: 0.2s;
     }
-    .add-task-button:hover{
+    .add-task-button:hover, .add-workspace-task-button:hover{
         background-color:#d7c4fd;
         transition: background-color 0.3s;
     }
-    .task-box:hover .task-box-2, .comm-box:hover .comm-box-2{
+    .task-box:hover .task-box-2, .task-box:hover .workspace-task-delete, .comm-box:hover .comm-box-2{
         display: flex;
         width: 10%;
         transition: width 0.2s;
         padding-left: 0.8rem;
     }
+    
     .task-box:hover .task-det, .comm-box:hover .comm-det{
         width: 80%;
         transition: width 0.2s;
@@ -654,7 +805,7 @@
         background-color: #ac8deb;
         transition: background-color 0.2s;
     }
-    .add-member-div>button:hover, .save-community:hover{
+    .add-member-div>.add-member:hover, .save-community:hover{
         background-color: #ac8deb;
         transform: background-color 0.2s;
     }
@@ -704,7 +855,7 @@
         width: 15%;
         transition: width 0.2s;
     }
-    .task-box:hover .task-box-2{
+    .task-box:hover .task-box-2, .task-box:hover .workspace-task-delete{
         width: 15%;
         transition: width 0.2s;
     }
@@ -765,7 +916,7 @@
         width: 20%;
         transition: width 0.2s;
     }
-    .task-box:hover .task-box-2{
+    .task-box:hover .task-box-2, .task-box:hover .workspace-task-delete{
         width: 20%;
         transition: width 0.2s;
     }
@@ -831,7 +982,7 @@
         padding-left: 20px;
         padding-right: 20px;
     }
-    .add-task-button{
+    .add-task-button, .add-workspace-task-button{
         width: 60px;
     }
     .content-head{

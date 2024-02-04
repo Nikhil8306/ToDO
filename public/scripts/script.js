@@ -15,6 +15,7 @@ const buttons = document.querySelectorAll('.panel-item');
 const panelItems = [homePage, statPage, comPage, taskPage];
 
 const baseUrl = ''
+let currUserId = ''
 
 for(let i = 0; i < 4; i++){
     buttons[i].addEventListener("click", function(){
